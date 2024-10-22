@@ -565,6 +565,27 @@ Null Nacionalidade</note>
       <bordercolorblue>100</bordercolorblue>
       <drawshadow>Y</drawshadow>
     </notepad>
+    <notepad>
+      <note>Merge the zip code with the address</note>
+      <xloc>1216</xloc>
+      <yloc>224</yloc>
+      <width>201</width>
+      <heigth>26</heigth>
+      <fontname>Segoe UI</fontname>
+      <fontsize>9</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <order>
     <hop>
@@ -650,6 +671,21 @@ Null Nacionalidade</note>
     <hop>
       <from>Microsoft Excel input 2</from>
       <to>Sort rows 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge join 2</from>
+      <to>Sort rows 5</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows 5</from>
+      <to>Microsoft Excel output 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows 5</from>
+      <to>JSON output 3</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -2031,7 +2067,7 @@ Null Nacionalidade</note>
     </partitioning>
     <failIfNoFile>Y</failIfNoFile>
     <calculation>
-      <field_name>Address</field_name>
+      <field_name>Address_with_zip</field_name>
       <calc_type>ADD</calc_type>
       <field_a>address</field_a>
       <field_b>zipCode</field_b>
@@ -2286,6 +2322,301 @@ Null Nacionalidade</note>
     <GUI>
       <xloc>1664</xloc>
       <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 5</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>Família de</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>has_children</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>2080</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Microsoft Excel output 2</name>
+    <type>ExcelOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <header>Y</header>
+    <footer>N</footer>
+    <encoding/>
+    <append>N</append>
+    <add_to_result_filenames>Y</add_to_result_filenames>
+    <file>
+      <name>C:/Users/perei/OneDrive/Ambiente de Trabalho/trabalho_isi/output/final_version_data_with_address</name>
+      <extention>xls</extention>
+      <do_not_open_newfile_init>N</do_not_open_newfile_init>
+      <create_parent_folder>N</create_parent_folder>
+      <split>N</split>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <sheetname>Sheet1</sheetname>
+      <autosizecolums>N</autosizecolums>
+      <nullisblank>N</nullisblank>
+      <protect_sheet>N</protect_sheet>
+      <password>Encrypted </password>
+      <splitevery>0</splitevery>
+      <usetempfiles>N</usetempfiles>
+      <tempdirectory/>
+    </file>
+    <template>
+      <enabled>N</enabled>
+      <append>N</append>
+      <filename>template.xls</filename>
+    </template>
+    <fields>
+      <field>
+        <name>address</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>zipCode</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>Address_with_zip</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>ID</name>
+        <type>Number</type>
+        <format/>
+      </field>
+      <field>
+        <name>Nome</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>Telemóvel</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>Referência</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>Família de</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>Nacionalidade</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>Pedidos</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>Notas</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>Warned</name>
+        <type>Boolean</type>
+        <format/>
+      </field>
+      <field>
+        <name>has_children</name>
+        <type>Boolean</type>
+        <format/>
+      </field>
+      <field>
+        <name>Visitas</name>
+        <type>String</type>
+        <format/>
+      </field>
+    </fields>
+    <custom>
+      <header_font_name>arial</header_font_name>
+      <header_font_size>10</header_font_size>
+      <header_font_bold>N</header_font_bold>
+      <header_font_italic>N</header_font_italic>
+      <header_font_underline>no</header_font_underline>
+      <header_font_orientation>horizontal</header_font_orientation>
+      <header_font_color>black</header_font_color>
+      <header_background_color>none</header_background_color>
+      <header_row_height>255</header_row_height>
+      <header_alignment>left</header_alignment>
+      <header_image/>
+      <row_font_name>arial</row_font_name>
+      <row_font_size>10</row_font_size>
+      <row_font_color>black</row_font_color>
+      <row_background_color>none</row_background_color>
+    </custom>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>2288</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>JSON output 3</name>
+    <type>JsonOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <outputValue>outputValue</outputValue>
+    <jsonBloc>data</jsonBloc>
+    <nrRowsInBloc>0</nrRowsInBloc>
+    <operation_type>writetofile</operation_type>
+    <compatibility_mode>N</compatibility_mode>
+    <encoding>UTF-8</encoding>
+    <addtoresult>N</addtoresult>
+    <file>
+      <name>C:/Users/perei/OneDrive/Ambiente de Trabalho/trabalho_isi/output/final_output_data_with_address</name>
+      <extention>json</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>Y</add_date>
+      <add_time>N</add_time>
+      <create_parent_folder>N</create_parent_folder>
+      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
+      <servlet_output>N</servlet_output>
+    </file>
+    <fields>
+      <field>
+        <name>address</name>
+        <element>address</element>
+      </field>
+      <field>
+        <name>zipCode</name>
+        <element>zipCode</element>
+      </field>
+      <field>
+        <name>Address_with_zip</name>
+        <element>Address_with_zip</element>
+      </field>
+      <field>
+        <name>ID</name>
+        <element>ID</element>
+      </field>
+      <field>
+        <name>Nome</name>
+        <element>Nome</element>
+      </field>
+      <field>
+        <name>Telemóvel</name>
+        <element>Telemóvel</element>
+      </field>
+      <field>
+        <name>Referência</name>
+        <element>Referência</element>
+      </field>
+      <field>
+        <name>Família de</name>
+        <element>Família de</element>
+      </field>
+      <field>
+        <name>Nacionalidade</name>
+        <element>Nacionalidade</element>
+      </field>
+      <field>
+        <name>Pedidos</name>
+        <element>Pedidos</element>
+      </field>
+      <field>
+        <name>Notas</name>
+        <element>Notas</element>
+      </field>
+      <field>
+        <name>Warned</name>
+        <element>Warned</element>
+      </field>
+      <field>
+        <name>has_children</name>
+        <element>has_children</element>
+      </field>
+      <field>
+        <name>Visitas</name>
+        <element>Visitas</element>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>2288</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
